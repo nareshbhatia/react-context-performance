@@ -11,23 +11,36 @@ $ yarn
 $ yarn start
 ```
 
-Now point your browser to http://localhost:3000/.
+Now point your browser to http://localhost:3000/. Start typing and see render
+counts for various components. These counts represent calls to render methods of
+the associated components, i.e. virtual rendering of the VDOM. Note that this is
+different from real DOM rendering, which is controlled and optimized by React.
+Also note that when typing into the favorite movie box, the favorite singer
+viewer is not re-rendered. This optimization is obtained by using React.memo().
 
-Open the console in Chrome DevTools to see render messages from different
-components. As you type a new message, you will find that the `MessageEditor`
-and the `MessageViewer` re-render, but the entire `App` doesn't. This proves
-that only the context consumers are re-rendered when the context changes.
+## Seeing re-rendering in action
 
-You can also turn on render highlighting in Chrome DevTools. Click on the
-vertical menu button (3 dots), then More Tools > Rendering > Paint flashing.
+### Option 1: React DevTools - highlights virtual rendering of VDOM
 
-Another option is to turn on render highlighting in React DevTools. Go to the
-Components tab and select Settings > Highlight updates when components render.
-However I found that React DevTools highlights the app component too on every
-keystroke. Puzzled with this one!
+-   Go to the Components tab of React DevTools
+-   Select Settings > Highlight updates when components render
 
-A better option is to run the React DevTools profiler. The flamegraph below
-clearly shows that only the `App` component is not rendered when typing a
-message.
+You can also run the React DevTools profiler. The flamegraph below shows that
+the `App` component is not rendered when typing a message.
 
 ![Flamegraph](assets/flamegraph.png)
+
+### Option 2: Chrome DevTools - shows native rendering of DOM
+
+-   Click on the vertical menu button (3 dots)
+-   Select More Tools > Rendering > Paint flashing
+
+## Notes
+
+-   I have removed <React.StrictMode> from index.tsx because in this mode,
+    components with hooks are intentionally rendered twice in debug mode. See
+    https://github.com/facebook/react/issues/15074.
+
+## References
+
+-   [When does React re-render components?](https://felixgerschau.com/react-rerender-components/)

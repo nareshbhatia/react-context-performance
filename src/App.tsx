@@ -1,29 +1,25 @@
-import React from 'react';
-import Debug from 'debug';
-import { MessageEditor, MessageViewer } from './components';
-import { MessageProvider } from './contexts';
-
-const debug = Debug('App');
+import React, { Fragment } from 'react';
+import { Movie, Singer } from './components';
+import { AppStateProvider } from './contexts';
 
 export const App: React.FC = () => {
-    debug('Rendering...');
-
     return (
-        <div>
-            <MessageProvider>
-                <h1>React Context Performance</h1>
-                <p>
-                    Open Chrome DevTools to see which components are rendering
-                </p>
-                <div className="content">
-                    <div className="lhs-panel">
-                        <MessageEditor />
-                    </div>
-                    <div className="rhs-panel">
-                        <MessageViewer />
+        <Fragment>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div className="navbar-brand">React Context Performance</div>
+            </nav>
+            <AppStateProvider>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm">
+                            <Movie />
+                        </div>
+                        <div className="col-sm">
+                            <Singer />
+                        </div>
                     </div>
                 </div>
-            </MessageProvider>
-        </div>
+            </AppStateProvider>
+        </Fragment>
     );
 };

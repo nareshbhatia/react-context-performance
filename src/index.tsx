@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import { App } from './App';
+import 'bootswatch/dist/darkly/bootstrap.min.css';
 
-ReactDOM.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
-    document.getElementById('root')
-);
+// Note: I have removed <React.StrictMode> because in this mode, components
+// with hooks are intentionally rendered twice in debug mode.
+// See https://github.com/facebook/react/issues/15074.
+ReactDOM.render(<App />, document.getElementById('root'));
