@@ -23,9 +23,6 @@ export const ContentEditor = React.memo(
                         value={value}
                         onChange={handleChange}
                     />
-                    <small className="form-text text-muted">
-                        Enter the name of your favorite movie
-                    </small>
                 </div>
             </div>
         );
